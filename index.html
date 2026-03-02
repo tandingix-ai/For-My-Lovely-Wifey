@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Mamii ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+}
+
+/* Landing Page */
+#landing {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  text-align: center;
+  color: white;
+}
+
+/* Book Container */
+#book-container {
+  display: none;
+  width: 90%;
+  max-width: 500px;
+  height: 80vh;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Individual Pages */
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: none; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  animation: flipIn 0.8s ease-out;
+}
+
+.page.active {
+  display: flex; 
+}
+
+h2 { color: #ff4d88; margin-bottom: 20px; }
+p { font-size: 18px; line-height: 1.6; color: #444; }
+
+.gallery img, .gallery video {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.btn-nav {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d88;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Music Toggle Button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
+}
+
+@keyframes flipIn {
+  from { transform: rotateY(-90deg); opacity: 0; }
+  to { transform: rotateY(0deg); opacity: 1; }
+}
+
+.heart { position: fixed; bottom: -10px; animation: floatUp 7s linear infinite; z-index: 1; }
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="landing">
+  <h1>Hi Mamii ❤️</h1>
+  <p>I have a story to tell you...</p>
+  <button class="btn-nav" style="background:white; color:#ff4d88;" onclick="enterSite()">Open Your Surprise 🎁</button>
+</div>
+
+<div id="book-container">
+  
+  <div class="page active" id="p1">
+    <h2>Happy Birthday Mamii 🎉</h2>
+    <div id="countdown" style="font-weight: bold; font-size: 20px; color: #ff2e63;"></div>
+    <p>Every page is a piece of my heart.</p>
+    <button class="btn-nav" onclick="nextPage(2)">Next Page ❤️</button>
+  </div>
+
+  <div class="page" id="p2">
+    <h2>A Special Message</h2>
+    <p>Happy Birthday my love ❤️<br><br>Even though distance separates us, my heart is always with you. You are my everything.</p>
+    <button class="btn-nav" onclick="nextPage(3)">Next Page ❤️</button>
+  </div>
+
+  <div class="page" id="p3">
+    <h2>How We Met</h2>
+    <p>It was around the 6th period when I attended my first class. Everyone was staring at me, and one of them was you. You fell first… but I fell harder.</p>
+    <button class="btn-nav" onclick="nextPage(4)">Next Page ❤️</button>
+  </div>
+
+  <div class="page" id="p4">
+    <h2>The Wedding</h2>
+    <p>We got married on <strong>24 February 2025</strong> — the happiest moment of my life. I promise to be a better partner every day.</p>
+    <button class="btn-nav" onclick="nextPage(5)">Next Page ❤️</button>
+  </div>
+
+  <div class="page gallery" id="p5">
+    <h2>Our Memories 📸</h2>
+    <img src="photo1.jpg">
+    <video controls loop>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+    <button class="btn-nav" onclick="nextPage(6)">Last Page ❤️</button>
+  </div>
+
+  <div class="page" id="p6">
+    <h2>Forever Yours</h2>
+    <p>No matter how far we are, you will always be my home ❤️<br><br>I love you forever Mamii.<br>— Tandin Gix</p>
+    <button class="btn-nav" onclick="nextPage(1)">Back to Start 🔄</button>
+  </div>
+
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<script>
+let currentPage = 1;
+const audio = document.getElementById("bgMusic");
+
+function enterSite() {
+  document.getElementById("landing").style.display = "none";
+  document.getElementById("book-container").style.display = "block";
+  document.getElementById("musicBtn").style.display = "block";
+  
+  // THIS IS THE EDIT: Music starts here!
+  audio.play().catch(error => {
+    console.log("Music needs one more click to play!");
+  });
+}
+
+function nextPage(pageNumber) {
+  document.getElementById(`p${currentPage}`).classList.remove('active');
+  document.getElementById(`p${pageNumber}`).classList.add('active');
+  currentPage = pageNumber;
+}
+
+function toggleMusic() {
+  if (audio.paused) { audio.play(); } else { audio.pause(); }
+}
+
+/* Countdown */
+var birthday = new Date("March 3, 2026 00:00:00").getTime();
+setInterval(function(){
+  var now = new Date().getTime();
+  var distance = birthday - now;
+  var d = Math.floor(distance/(1000*60*60*24));
+  var h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  var m = Math.floor((distance%(1000*60*60))/(1000*60));
+  var s = Math.floor((distance%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML = d+"d "+h+"h "+m+"m "+s+"s ";
+}, 1000);
+
+/* Floating hearts */
+setInterval(function(){
+  var heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+14)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},7000);
+},700);
+</script>
+
+</body>
+</html>
